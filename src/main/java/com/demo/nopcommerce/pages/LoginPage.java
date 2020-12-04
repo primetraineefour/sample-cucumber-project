@@ -1,7 +1,8 @@
 package com.demo.nopcommerce.pages;
 
 import com.demo.nopcommerce.utility.Utility;
-import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
 
 
 /**
@@ -9,26 +10,48 @@ import org.openqa.selenium.By;
  */
 public class LoginPage extends Utility {
 
-    By emailField = By.id("Email");
-    By passwordField = By.id("Password");
-    By loginBtn = By.xpath("//input[@class='button-1 login-button']");
-    By welcomeText = By.xpath("//div[@class='page-title']//h1");
+    @FindBy(id = "Email")
+    WebElement _emailField;
+
+    @FindBy(id = "Password")
+    WebElement _passwordField;
+
+    @FindBy(xpath = "//input[@class='button-1 login-button']")
+    WebElement _loginBtn;
+
+    @FindBy(xpath = "//div[@class='page-title']//h1")
+    WebElement _welcomeText;
+
+    @FindBy(xpath = "//div[@class='topic-block-title']//h2")
+    WebElement _welcomeToStoreText;
+
+    @FindBy(xpath = "//div[@class='message-error validation-summary-errors']")
+    WebElement _errorMessage;
 
     public void enterEmailId(String email) {
-        sendTextToElement(emailField, email);
+        sendTextToElement(_emailField, email);
     }
 
     public void enterPassword(String password) {
-        sendTextToElement(passwordField, password);
+        sendTextToElement(_passwordField, password);
     }
 
     public void clickOnLoginButton() {
-        clickOnElement(loginBtn);
+        clickOnElement(_loginBtn);
     }
 
     public String getWelcomeText() {
-        return getTextFromElement(welcomeText);
+        return getTextFromElement(_welcomeText);
 
+    }
+
+    public String getWelcomeToStoreText() {
+        return getTextFromElement(_welcomeToStoreText);
+
+    }
+
+    public String getErrorMessage() {
+        return getTextFromElement(_errorMessage);
     }
 
     public void loginToApplication(String username, String password) {
@@ -36,6 +59,5 @@ public class LoginPage extends Utility {
         enterPassword(password);
         clickOnLoginButton();
     }
-
 
 }

@@ -1,10 +1,12 @@
 package com.demo.nopcommerce.basepage;
 
 import com.demo.nopcommerce.propertyreader.PropertyReader;
+import org.apache.log4j.PropertyConfigurator;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
+import org.openqa.selenium.support.PageFactory;
 
 import java.util.concurrent.TimeUnit;
 
@@ -16,6 +18,11 @@ public class BasePage {
     public static WebDriver driver;
     String baseUrl = PropertyReader.getInstance().getProperty("baseUrl");
     String projectPath = System.getProperty("user.dir");
+
+    public BasePage() {
+        PageFactory.initElements(driver, this);
+        PropertyConfigurator.configure(System.getProperty("user.dir")+"\\src\\test\\java\\resources\\propertiesfile\\log4j.properties");
+    }
 
     public void selectBrowser(String browser) {
         if (browser.equalsIgnoreCase("chrome")) {
