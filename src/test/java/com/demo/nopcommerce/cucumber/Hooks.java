@@ -18,6 +18,7 @@ public class Hooks extends BasePage {
     @Before
     public void openBrowser(){
         selectBrowser(PropertyReader.getInstance().getProperty("browser"));
+        Reporter.assignAuthor("Prime Testing", "Jay Vaghani");
     }
 
     @After
